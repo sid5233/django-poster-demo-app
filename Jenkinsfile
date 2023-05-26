@@ -10,9 +10,14 @@ pipeline{
 
         stage('Docker Build and Tag') {
            steps {
-                sh 'docker login'
-                sh 'docker build -t  python-openshift:latest .' 
-                sh 'docker tag python-openshif  bizmetric1/python-openshift:latest'
+            script {
+                    dockerImage.tag('python-openshift:latest')
+                    dockerImage.tag('python-openshift:${env.BUILD_NUMBER}')
+                }
+
+                // sh 'docker login'
+                // sh 'docker build -t python-openshift:latest .' 
+                // sh 'docker tag  bizmetric1/python-openshift:latest'
                 //sh 'docker tag samplewebapp bizmetric1/python-openshift:$BUILD_NUMBER'
                
           }
@@ -20,10 +25,12 @@ pipeline{
         stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push bizmetric1/python-openshift:latest'
-        //  sh  'docker push bizmetric1/python-openshift:$BUILD_NUMBER' 
-        }
+                withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+                sh  'docker push bizmetric1/python-openshift:latest'
+                //  sh  'docker push bizmetric1/python-openshift:$BUILD_NUMBER' 
+                dockerImage.push('python-openshift:latest')
+                dockerImage.push('python-openshift:${env.BUILD_NUMBER}')
+                }
                   
           }
         }

@@ -10,13 +10,9 @@ pipeline{
             }
         }
 
-        stage("Build"){
-            steps{
-                sh 'docker build -t myapp .'
-            }
-        }
         stage('Test'){
-            sh 'docker-compose up'
+               sh 'docker-compose build'
+                sh 'docker-compose push'
         }
     }
 }

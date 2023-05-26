@@ -13,7 +13,7 @@ pipeline{
                 sh 'docker login'
                 sh 'docker build -t  python-openshift:latest .' 
                 sh 'docker tag python-openshif  bizmetric1/python-openshift:latest'
-                //sh 'docker tag samplewebapp shivalikirdat/samplewebapp:$BUILD_NUMBER'
+                //sh 'docker tag samplewebapp bizmetric1/python-openshift:$BUILD_NUMBER'
                
           }
         }
@@ -22,7 +22,7 @@ pipeline{
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
           sh  'docker push bizmetric1/python-openshift:latest'
-        //  sh  'docker push shivalikirdat/samplewebapp:$BUILD_NUMBER' 
+        //  sh  'docker push bizmetric1/python-openshift:$BUILD_NUMBER' 
         }
                   
           }

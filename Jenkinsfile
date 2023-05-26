@@ -12,7 +12,7 @@ pipeline{
 
         stage('Docker Build and Tag') {
            steps {
-              
+                sh 'docker login'
                 sh 'docker build -t  python-openshift:latest .' 
                 sh 'docker tag python-openshif  bizmetric1/python-openshift:latest'
                 //sh 'docker tag samplewebapp shivalikirdat/samplewebapp:$BUILD_NUMBER'

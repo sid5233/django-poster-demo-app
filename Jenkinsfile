@@ -19,5 +19,15 @@ pipeline{
                
           }
         }
+        stage('Publish image to Docker Hub') {
+          
+            steps {
+        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+          sh  'docker push bizmetric1/python-openshift:latest'
+        //  sh  'docker push shivalikirdat/samplewebapp:$BUILD_NUMBER' 
+        }
+                  
+          }
+        }
     }
 }

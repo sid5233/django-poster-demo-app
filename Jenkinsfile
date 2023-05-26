@@ -14,7 +14,7 @@ pipeline{
            steps {
               
                 sh 'docker build -t  python-openshift:latest .' 
-                sh 'docker tag python-app  bizmetric1/python-openshift:latest'
+                sh 'docker tag python-openshif  bizmetric1/python-openshift:latest'
                 //sh 'docker tag samplewebapp shivalikirdat/samplewebapp:$BUILD_NUMBER'
                
           }

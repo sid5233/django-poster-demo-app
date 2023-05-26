@@ -26,7 +26,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
 ALLOWED_HOSTS = [
-    '52.91.253.76'
+    '52.91.253.76',
+    '127.0.0.1',
+    '0.0.0.0'
 ]
 ALLOWED_HOSTS.extend(
     filter(
